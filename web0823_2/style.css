@@ -1,0 +1,7 @@
+#box{
+    width: 200px;
+    height:200px;
+    background-color: aqua;
+    border:10px solid black;
+    transform: rotate(90deg);
+}
