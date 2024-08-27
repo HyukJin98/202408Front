@@ -34,7 +34,7 @@
             const inputId = document.querySelector('input[name=id]').value;
             const inputTitle = document.querySelector('input[name=title]').value;
             const inputAuthor = document.querySelector('input[name=author]').value;
-
+            
             const postParams = {
                 id: inputId,
                 title: inputTitle,
@@ -55,8 +55,42 @@
             })
             .catch(error => console.error('Error:', error));
         }
-        function updatePost() {}
-        function deletePost() {}
+        function updatePost() {
+            const inputId = document.querySelector('input[name=id]').value;
+            const inputTitle = document.querySelector('input[name=title]').value;
+            const inputAuthor = document.querySelector('input[name=author]').value;
+
+            const postParams = {
+                id : inputId,
+                title : inputTitle,
+                author : inputAuthor
+            };
+
+            fetch(`${apiUrl}/${inputId}`,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(postParams)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Post updated:',data);
+                readPosts();
+            }).catch(error => console.error('Error:',error));
+        }
+        function deletePost() {
+            const inputId = document.querySelector('input[name=id]').value;
+
+            fetch(`${apiUrl}/${inputId}`,{
+                method:'DELETE'
+            })
+            .then(response => response.json())
+            .then(data =>{
+                console.log('Post deleted:', data);
+                readPosts();
+            }).catch(error => console.error('Error:',error));
+        }
     </script>
 </body>
 </html>
